@@ -41,7 +41,8 @@ DeviceFileEvents
 | project Timestamp, DeviceName, ActionType, FileName, FolderPath, SHA256, Account = InitiatingProcessAccountName
 
 ```
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/71402e84-8767-44f8-908c-1805be31122d">
+<img width="1150" height="666" alt="image" src="https://github.com/user-attachments/assets/80c7fb9a-87da-40ca-ba64-9d2bf12dcf61" />
+
 
 ---
 
@@ -53,12 +54,13 @@ Searched for any `ProcessCommandLine` that contained the string "tor-browser-win
 
 ```kql
 
-DeviceProcessEvents  
-| where DeviceName == "threat-hunt-lab"  
-| where ProcessCommandLine contains "tor-browser-windows-x86_64-portable-14.0.1.exe"  
+DeviceProcessEvents
+| where DeviceName == "masif1"
+| where ProcessCommandLine contains "tor-browser-windows"
 | project Timestamp, DeviceName, AccountName, ActionType, FileName, FolderPath, SHA256, ProcessCommandLine
+
 ```
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/b07ac4b4-9cb3-4834-8fac-9f5f29709d78">
+<img width="1585" height="196" alt="image" src="https://github.com/user-attachments/assets/87039987-1193-4990-9713-d087013edc1d" />
 
 ---
 
@@ -69,13 +71,14 @@ Searched for any indication that user "employee" actually opened the TOR browser
 **Query used to locate events:**
 
 ```kql
-DeviceProcessEvents  
-| where DeviceName == "threat-hunt-lab"  
-| where FileName has_any ("tor.exe", "firefox.exe", "tor-browser.exe")  
-| project Timestamp, DeviceName, AccountName, ActionType, FileName, FolderPath, SHA256, ProcessCommandLine  
+DeviceProcessEvents
+| where DeviceName == "masif1"
+| where FileName has_any ("tor-browser.exe", "firefox.exe", "tor.exe")
+| project Timestamp, DeviceName, AccountName, ActionType, FileName, FolderPath, SHA256, ProcessCommandLine
 | order by Timestamp desc
+
 ```
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/b13707ae-8c2d-4081-a381-2b521d3a0d8f">
+<img width="1692" height="884" alt="image" src="https://github.com/user-attachments/assets/2e345f54-4b30-4563-aced-fa729307e714" />
 
 ---
 
